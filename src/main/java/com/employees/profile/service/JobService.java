@@ -33,4 +33,8 @@ public class JobService {
 		Pageable pages = new PageRequest(page, count);
 		return this.jobRepository.findAll(pages);
 	}
+	
+	public void delete(String id) {
+		this.jobRepository.delete(id);
+	}
 }

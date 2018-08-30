@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.employees.profile.model.Departament;
 import com.employees.profile.model.Job;
 import com.employees.profile.service.JobService;
 import com.employees.profile.validation.JobValidation;
@@ -70,5 +72,18 @@ public class JobController {
 		Page<Job> jobs = jobService.findAll(page, count);
 		response.setData(jobs);
 		return ResponseEntity.ok(response);
+	}
+	
+	@DeleteMapping(value = "{id}")
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public ResponseEntity<Response<Job>> delete(@PathVariable("id") String id){
+		Response<Job> response = new Response<Job>();
+		Job job = jobService.findOne(id);
+		if(job == null) {
+			response.getErrors().add("Job not found id: " + id);
+			return ResponseEntity.badRequest().body(response);
+		}
+		this.jobService.delete(id);
+		return ResponseEntity.ok(response);		
 	}
 }
