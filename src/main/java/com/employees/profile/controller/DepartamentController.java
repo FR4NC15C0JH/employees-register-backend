@@ -1,5 +1,7 @@
 package com.employees.profile.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,16 @@ public class DepartamentController {
 	public ResponseEntity<Response<Page<Departament>>> findAll(@PathVariable int page, @PathVariable int count){
 		Response<Page<Departament>> response = new Response<Page<Departament>>();
 		Page<Departament> departaments = departamentService.findAll(page, count);
+		response.setData(departaments);
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping()
+	@RequestMapping("/list")
+	//@PreAuthorize("hasAnyRole('ADMIN','CUSTOMER')")
+	public ResponseEntity<Response<List<Departament>>> list(){
+		Response<List<Departament>> response = new Response<List<Departament>>();
+		List<Departament> departaments = departamentService.findAll();
 		response.setData(departaments);
 		return ResponseEntity.ok(response);
 	}

@@ -34,6 +34,10 @@ public class DepartamentService {
 		return this.departamentRepository.findAll(pages);
 	}
 	
+	public List<Departament> findAll(){
+		return this.departamentRepository.findAll();
+	}
+	
 	public void delete(String id) {
 		this.departamentRepository.delete(id);
 	}

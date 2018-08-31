@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.employees.profile.model.Departament;
 import com.employees.profile.model.Job;
 import com.employees.profile.service.JobService;
 import com.employees.profile.validation.JobValidation;

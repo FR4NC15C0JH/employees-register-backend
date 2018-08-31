@@ -36,8 +36,9 @@ public class UserController {
 	@Autowired
 	private UserValidation userValidation;
 	
+	@RequestMapping("/create")
 	@PostMapping
-	@PreAuthorize("hasAnyRole('ADMIN','CUSTOMER')")
+	//@PreAuthorize("hasAnyRole('ADMIN','CUSTOMER')")
 	public ResponseEntity<Response<User>> create(HttpServletRequest request, @RequestBody User user, BindingResult result){
 		Response<User> response = new Response<User>();
 		try {

@@ -63,7 +63,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 						"/favicon.ico",
 						"/**/*.html",
 						"/**/*.css",
-						"/**/*.js"
+						"/**/*.js",
+						"/api/departament/list"						
+				).permitAll()
+				.antMatchers(
+						HttpMethod.POST,
+						"/api/user/create"
 				).permitAll()
 				.antMatchers("/api/auth/**").permitAll()
 				.anyRequest().authenticated();
