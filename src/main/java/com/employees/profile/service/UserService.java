@@ -6,8 +6,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.employees.profile.model.Departament;
-import com.employees.profile.model.Job;
 import com.employees.profile.model.User;
 import com.employees.profile.repository.UserRepository;
 
@@ -36,5 +34,9 @@ public class UserService {
 	public Page<User> findAll(int page, int count) {
 		Pageable pages = new PageRequest(page, count);
 		return this.userRepository.findAll(pages);
+	}
+	
+	public void delete(String id) {
+		this.userRepository.delete(id);
 	}
 }

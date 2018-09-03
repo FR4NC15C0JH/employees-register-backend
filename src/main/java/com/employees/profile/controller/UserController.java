@@ -1,4 +1,5 @@
 package com.employees.profile.controller;
+import javax.jws.soap.SOAPBinding.Use;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -99,6 +101,19 @@ public class UserController {
 		Response<Page<User>> response = new Response<Page<User>>();
 		Page<User> users = userService.findAll(page, count);
 		response.setData(users);
+		return ResponseEntity.ok(response);
+	}
+	
+	@DeleteMapping(value = "{id}")
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public ResponseEntity<Response<User>> delete(@PathVariable("id") String id){
+		Response<User> response = new Response<User>();
+		User user = userService.findById(id);
+		if(user == null) {
+			response.getErrors().add("Register not found id:" + id);
+			return ResponseEntity.badRequest().body(response);
+		}
+		userService.delete(id);
 		return ResponseEntity.ok(response);
 	}
 	
