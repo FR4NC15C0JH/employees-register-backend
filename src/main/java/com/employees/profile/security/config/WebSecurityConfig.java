@@ -64,7 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 						"/**/*.html",
 						"/**/*.css",
 						"/**/*.js",
-						"/api/departament/list"						
+						"/api/departament/list",
+						"/api/job/list"
 				).permitAll()
 				.antMatchers(
 						HttpMethod.POST,

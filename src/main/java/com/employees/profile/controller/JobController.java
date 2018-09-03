@@ -1,5 +1,7 @@
 package com.employees.profile.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +72,14 @@ public class JobController {
 		Response<Page<Job>> response = new Response<Page<Job>>();
 		Page<Job> jobs = jobService.findAll(page, count);
 		response.setData(jobs);
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping(value = "/list")
+	public ResponseEntity<Response<List<Job>>> list(){
+		Response<List<Job>> response = new Response<List<Job>>();
+		List<Job> listJobs = jobService.list();
+		response.setData(listJobs);
 		return ResponseEntity.ok(response);
 	}
 	

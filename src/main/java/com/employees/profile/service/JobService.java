@@ -34,6 +34,10 @@ public class JobService {
 		return this.jobRepository.findAll(pages);
 	}
 	
+	public List<Job> list(){
+		return jobRepository.findAll();
+	}
+	
 	public void delete(String id) {
 		this.jobRepository.delete(id);
 	}
